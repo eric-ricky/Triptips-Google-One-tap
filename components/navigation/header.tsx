@@ -65,7 +65,7 @@ const Header = () => {
               {showTip && (
                 <span className="bg-white text-black w-36 absolute top-10 md:left-4 right-8 z-50 shadow-md rounded-lg p-4">
                   tip: wait for the google one tap or refresh the page if it
-                  doesn't appear
+                  doesn&apos;t appear
                 </span>
               )}
             </div>
