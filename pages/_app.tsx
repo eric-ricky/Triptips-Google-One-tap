@@ -6,6 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase/config";
 import { useCallback, useEffect } from "react";
 import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+
 interface AppPropsWithLayout extends AppProps {
   Component: NextPageWithLayout;
 }
@@ -40,17 +41,20 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   }, []);
 
   useEffect(() => {
-    if (loading) return;
+    console.log("user:", user);
+    if (loading || user) return;
 
-    if (user) return;
+    const timer = setTimeout(() => {
+      initializeGSI();
+    }, 2000);
 
-    console.log("=================no user, initializeGSI");
-    initializeGSI();
+    return () => clearTimeout(timer);
   }, [user, loading, initializeGSI]);
 
   return (
     <>
       <Script src="https://accounts.google.com/gsi/client" />
+
       {getLayout(
         <>
           {loading && (
